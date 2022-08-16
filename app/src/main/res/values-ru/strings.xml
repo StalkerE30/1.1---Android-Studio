@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Нмедиа</string>
+    <string name="hello">НМедиа!</string>
+    <string name="description_post_author_avatar">Аватар автора поста</string>
+    <string name="description_post_menu">Меню поста</string>
+    <string name="description_share">Значек поделиться</string>
+    <string name="description_eye">Значек просмотров</string>
+    <string name="description_favorite">Значек избранного</string>
+</resources>
