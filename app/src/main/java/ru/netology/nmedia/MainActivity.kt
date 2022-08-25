@@ -33,20 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.favorite.setOnClickListener {
             viewModel.like()
-            viewModel.data.observe(this) { post ->
-                with(binding) {
-                    textFavorite.text = viewModel.consumClicks(post.likes)
-                }
-            }
         }
 
         binding.share.setOnClickListener() {
             viewModel.clickShare()
-            viewModel.data.observe(this) { post ->
-                with(binding) {
-                    textShare.text = viewModel.consumClicks(post.share)
-                }
-            }
         }
     }
 }

@@ -36,11 +36,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun like() {
         post = post.copy(likedByMe = !post.likedByMe)
-        if (post.likedByMe) post = post.copy(likes = post.likes++) else post = post.copy(likes =post.likes--)
+        if (post.likedByMe) post = post.copy(likes = ++post.likes) else post = post.copy(likes = --post.likes)
         data.value = post
     }
     override fun clickShare(){
-        post = post.copy(share = post.share++)
+        post = post.copy(share = ++post.share)
         data.value = post
     }
 }
