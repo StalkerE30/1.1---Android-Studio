@@ -5,42 +5,37 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 
 class PostRepositoryInMemoryImpl : PostRepository {
-    private var post = Post(
-        id = 1,
-        author = "Нетология. Университет интернет-профессий будущего",
-        content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-        published = "21 мая в 18:36",
-        likes = 999,
-        share = 999999,
-        likedByMe = false
-    )
-    private val data = MutableLiveData(post)
+    private var posts = List(500) {
+        Post(
+            id = it.toLong(),
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "$it Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+            published = "21 мая в 18:36",
+            likes = 999,
+            share = 99,
+            likedByMe = false
+        )
+    }.reversed()
 
-    override fun consumClicks(countClicks: Int):String {
-        val res: String
-        when {
-            (countClicks / 1_000_000).toString().length >= 2 -> res =
-                (countClicks / 1_000_000).toString() + "M"
-            (countClicks / 1_000_000) != 0 && (countClicks / 1_000_000).toString().length == 1 -> res =
-                (countClicks / 1_000_000.0).toString().subSequence(0, 3).toString() + "M"
-            (countClicks / 1_000).toString().length >= 2 -> res =
-                (countClicks / 1_000).toString() + "K"
-            (countClicks / 1_000) != 0 && (countClicks / 1_000).toString().length == 1 -> res =
-                (countClicks / 1_000.0).toString().subSequence(0, 3).toString() + "K"
-            else -> res = countClicks.toString()
+    private val data = MutableLiveData(posts)
+
+    override fun getALL(): LiveData<List<Post>> = data
+
+
+    override fun likeById(id: Long) {
+        posts = posts.map {
+            if (it.id != id) it else it.copy(likedByMe = !it.likedByMe)
         }
-        return res
+        posts = posts.map {
+            if (it.id != id) it else it.copy(likes = if (it.likedByMe) ++it.likes else --it.likes)
+        }
+        data.value = posts
     }
 
-    override fun get(): LiveData<Post> = data
-
-    override fun like() {
-        post = post.copy(likedByMe = !post.likedByMe)
-        if (post.likedByMe) post = post.copy(likes = ++post.likes) else post = post.copy(likes = --post.likes)
-        data.value = post
-    }
-    override fun clickShare(){
-        post = post.copy(share = ++post.share)
-        data.value = post
+    override fun clickShareById(id:Long){
+        posts = posts.map {
+            if (it.id != id) it else it.copy(share = ++it.share)
+        }
+        data.value = posts
     }
 }

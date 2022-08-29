@@ -4,39 +4,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import androidx.activity.viewModels
-import ru.netology.nmedia.R
+import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.viewmodel.PostViewModel
 import android.util.Log
+import ru.netology.nmedia.activity.PostAdapter
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-
-        viewModel.data.observe(this) { post ->
-            with(binding) {
-                author.text = post.author
-                published.text = post.published
-                content.text = post.content
-                favorite.setImageResource(
-                    if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_baseline_favorite_border_24
-                )
-                textFavorite.text = viewModel.consumClicks(post.likes)
-                textShare.text = viewModel.consumClicks(post.share)
-            }
+        val adapter = PostAdapter(onClickListener = {
+            viewModel.likeById(it.id)
+            }, onShareListener = {
+            viewModel.clickShareById(it.id)
+        })
+        binding.list.adapter = adapter
+        viewModel.data.observe(this) { posts ->
+            adapter.submitList(posts)
         }
 
-        binding.favorite.setOnClickListener {
-            viewModel.like()
-        }
-
-        binding.share.setOnClickListener() {
-            viewModel.clickShare()
-        }
     }
 }
