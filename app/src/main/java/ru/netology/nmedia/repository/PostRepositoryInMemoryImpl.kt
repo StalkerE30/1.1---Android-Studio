@@ -34,7 +34,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun clickShareById(id:Long){
         posts = posts.map {
-            if (it.id != id) it else it.copy(share = ++it.share)
+            if (it.id != id) it else it.copy(share = it.share+1)
         }
         data.value = posts
     }
