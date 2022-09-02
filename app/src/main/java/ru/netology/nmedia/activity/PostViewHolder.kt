@@ -28,7 +28,6 @@ fun consumClicks(countClicks: Int): String {
 }
 
 class PostViewHolder(
-    private val actMain: ActivityMainBinding,
     private val binding: CardPostBinding,
     private val listener:OnInteractionListener,
 ):RecyclerView.ViewHolder(binding.root) {
@@ -60,7 +59,6 @@ class PostViewHolder(
                                 true
                             }
                             R.id.edit -> {
-                               actMain.groupEditor.visibility=View.VISIBLE
                                 listener.edit(post)
                                 true
                                 }

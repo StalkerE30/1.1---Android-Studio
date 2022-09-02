@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             if (it.id ==0L){
                 return@observe
             }
+            binding.groupEditor.visibility = View.VISIBLE
             with(binding.content){
                 setText(it.content)
                 requestFocus()
@@ -52,7 +53,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonCancel.setOnClickListener{
             binding.groupEditor.visibility = View.GONE
-            with(binding.content){AndroidUtils.hideKeyboard(this)}
+            with(binding.content){
+                setText("")
+                AndroidUtils.hideKeyboard(this)
+            }
         }
 
         binding.buttonSend.setOnClickListener{
@@ -66,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.save()
                 setText("")
                 clearFocus()
+                binding.groupEditor.visibility = View.GONE
                 AndroidUtils.hideKeyboard(this)
             }
         }

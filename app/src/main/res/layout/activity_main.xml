@@ -74,8 +74,8 @@
         android:id="@+id/group_editor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="button_cancel,text_cancel,button_send,content" />
+        android:visibility="gone"
+        app:constraint_referenced_ids="button_cancel,text_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
