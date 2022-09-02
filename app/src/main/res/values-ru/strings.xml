@@ -7,4 +7,8 @@
     <string name="description_share">Значек поделиться</string>
     <string name="description_eye">Значек просмотров</string>
     <string name="description_favorite">Значек избранного</string>
+    <string name="Menu_Remove">Удалить</string>
+    <string name="Menu_Edit">Редактировать</string>
+    <string name="post_hint">Контент поста</string>
+    <string name="empty_post_error">Содержание поста не может быть пустым</string>
 </resources>

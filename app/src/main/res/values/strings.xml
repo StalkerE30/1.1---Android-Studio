@@ -6,4 +6,8 @@
     <string name="description_share">Icon share</string>
     <string name="description_eye">Icon eye</string>
     <string name="description_favorite">Icon favorite</string>
+    <string name="Menu_Edit">Edit</string>
+    <string name="Menu_Remove">Remove</string>
+    <string name="post_hint">Content</string>
+    <string name="empty_post_error">Empty content not allowed</string>
 </resources>

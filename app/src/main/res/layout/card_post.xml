@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_netology_48dp"/>
-        //tools:src="@sample/posts_avatars" />
 
     <TextView
         android:id="@+id/author"

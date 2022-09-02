@@ -1,9 +1,15 @@
 package ru.netology.nmedia.activity
 
+import android.opengl.Visibility
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.PopupMenu
+import ru.netology.nmedia.MainActivity
 import ru.netology.nmedia.R
+import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
+
 
 fun consumClicks(countClicks: Int): String {
     val res: String
@@ -22,9 +28,9 @@ fun consumClicks(countClicks: Int): String {
 }
 
 class PostViewHolder(
+    private val actMain: ActivityMainBinding,
     private val binding: CardPostBinding,
-    private val onClickListener:(Post) -> Unit,
-    private val onShareListener:(Post) -> Unit,
+    private val listener:OnInteractionListener,
 ):RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         with(binding) {
@@ -38,10 +44,30 @@ class PostViewHolder(
             textShare.text = consumClicks(post.share)
 
             favorite.setOnClickListener {
-                onClickListener(post)
+                listener.like(post)
             }
             share.setOnClickListener{
-                onShareListener(post)
+                listener.share(post)
+            }
+
+            menu.setOnClickListener {
+                PopupMenu(it.context,it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                listener.remove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                               actMain.groupEditor.visibility=View.VISIBLE
+                                listener.edit(post)
+                                true
+                                }
+                            else -> false
+                        }
+                    }
+                }.show()
             }
         }
     }
