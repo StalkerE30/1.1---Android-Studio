@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             binding.groupEditor.visibility = View.GONE
             with(binding.content){
                 setText("")
+                viewModel.canelEdit()
                 AndroidUtils.hideKeyboard(this)
             }
         }

@@ -41,4 +41,7 @@ class PostViewModel : ViewModel() {
         edited.value= edited.value?.copy(content = content)
 
     }
+    fun canelEdit(){
+        edited.value = empty
+    }
 }
