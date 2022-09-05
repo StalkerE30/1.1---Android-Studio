@@ -36,11 +36,13 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            favorite.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_baseline_favorite_border_24
-            )
-            textFavorite.text = consumClicks(post.likes)
-            textShare.text = consumClicks(post.share)
+            if (post.likedByMe) favorite.isChecked=true else favorite.isChecked =false
+            //favorite.setIconResource(R.drawable.ic_liked_24)
+            //if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_baseline_favorite_border_24
+            //)
+
+            favorite.text = consumClicks(post.likes)
+            share.text = consumClicks(post.share)
 
             favorite.setOnClickListener {
                 listener.like(post)
