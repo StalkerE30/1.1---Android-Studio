@@ -13,7 +13,8 @@ private val empty = Post(
     published= "",
     likes = 0,
     share = 0,
-    likedByMe = false
+    likedByMe = false,
+    urlVideo = "https://www.youtube.com/watch?v=WhWc3b3KhnY" // временно. чтобы при добавлении нового поста вставлялось видео
 )
 
 class PostViewModel : ViewModel() {
@@ -24,23 +25,22 @@ class PostViewModel : ViewModel() {
     fun likeById(id: Long) = repository.likeById(id)
     fun clickShareById(id: Long) = repository.clickShareById(id)
     fun removeById(postId: Long) = repository.removeById(postId)
-    fun save() {
-        edited.value?.let {
-            repository.save(it)
-            edited.value = empty
-        }
-    }
+
     fun edit(post:Post){
         edited.value = post
     }
 
-    fun changeContent(content:String){
+    fun changeContentAndSave(content:String){
         if (content == edited.value?.content){
             return
         }
-        edited.value= edited.value?.copy(content = content)
+        edited.value?.let {
+            repository.save(it.copy(content = content))
+            edited.value = empty
+        }
 
     }
+
     fun canelEdit(){
         edited.value = empty
     }

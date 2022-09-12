@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -117,7 +117,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/common_spacing"
-        android:checkable="true"
         android:contentDescription="@string/description_share"
         app:icon="@drawable/ic_share_24"
         app:layout_constraintStart_toEndOf="@id/favorite"
@@ -148,6 +147,52 @@
         app:layout_constraintTop_toTopOf="@id/eye"
         android:textSize="20dp"
         />
+
+    <TextView
+        android:id="@+id/urlVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginBottom="@dimen/common_spacing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/video_poster"
+        app:layout_constraintBottom_toTopOf="@id/downBarrier"
+        />
+
+    <ImageView
+        android:id="@+id/video_poster"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/topBarrier"
+        app:layout_constraintBottom_toTopOf="@id/urlVideo"
+        app:srcCompat="@drawable/youtube"
+        android:contentDescription="@string/poster_of_video" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/play"
+        style="@style/Widget.AppTheme.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkable="true"
+        app:layout_constraintTop_toTopOf="@id/video_poster"
+        app:layout_constraintBottom_toBottomOf="@id/video_poster"
+        app:layout_constraintStart_toStartOf="@id/video_poster"
+        app:layout_constraintEnd_toEndOf="@id/video_poster"
+        android:contentDescription="@string/description_play"
+        app:iconSize="48dp"
+        app:icon="@drawable/ic_baseline_play_circle_filled_24"
+        />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="urlVideo,video_poster,play" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

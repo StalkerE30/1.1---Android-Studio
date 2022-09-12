@@ -13,7 +13,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "21 мая в 18:36",
             likes = 999,
             share = 99,
-            likedByMe = false
+            likedByMe = false,
+            urlVideo = ""
         )
     }.reversed()
 

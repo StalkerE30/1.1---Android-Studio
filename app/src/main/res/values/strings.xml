@@ -10,4 +10,8 @@
     <string name="Menu_Remove">Remove</string>
     <string name="post_hint">Content</string>
     <string name="empty_post_error">Empty content not allowed</string>
+    <string name="chooser_share_post" translatable="false">chooser_share_post</string>
+    <string name="add_post">post_save</string>
+    <string name="poster_of_video">posterVideo</string>
+    <string name="description_play">play</string>
 </resources>

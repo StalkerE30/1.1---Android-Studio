@@ -1,9 +1,12 @@
 package ru.netology.nmedia
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import ru.netology.nmedia.activity.OnInteractionListener
 import ru.netology.nmedia.activity.PostAdapter
@@ -30,6 +33,22 @@ class MainActivity : AppCompatActivity() {
             }
             override fun share(post: Post) {
                 viewModel.clickShareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT,post.content)
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(intent,"chooser_share_post")
+                startActivity(shareIntent)
+            }
+            override fun playVideoContent(post:Post){
+                val intent = Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    Intent(action, Uri.parse(post.urlVideo))
+                }
+                val shareIntent = Intent.createChooser(intent,"choose Youtube")
+                startActivity(shareIntent)
+
             }
             override fun remove(post: Post) {
                 viewModel.removeById(post.id)
@@ -40,40 +59,35 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
-        viewModel.edited.observe(this){
-            if (it.id ==0L){
+        val activityLauncher = registerForActivityResult(NewPostActivity.Contract){text ->
+            text?: return@registerForActivityResult
+            viewModel.changeContentAndSave(text)
+
+        }
+
+        viewModel.edited.observe(this){post->
+            if (post.id ==0L){
                 return@observe
-            }
-            binding.groupEditor.visibility = View.VISIBLE
-            with(binding.content){
-                setText(it.content)
-                requestFocus()
-            }
-        }
-
-        binding.buttonCancel.setOnClickListener{
-            binding.groupEditor.visibility = View.GONE
-            with(binding.content){
-                setText("")
-                viewModel.canelEdit()
-                AndroidUtils.hideKeyboard(this)
-            }
-        }
-
-        binding.buttonSend.setOnClickListener{
-            with(binding.content){
-                val text = text?.toString()
-                if(text.isNullOrBlank()){
-                    Toast.makeText(context,R.string.empty_post_error,Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
                 }
-                viewModel.changeContent(text)
-                viewModel.save()
-                setText("")
-                clearFocus()
-                binding.groupEditor.visibility = View.GONE
-                AndroidUtils.hideKeyboard(this)
-            }
+
+
+            //binding.groupEditor.visibility = View.VISIBLE
+            activityLauncher.launch(post.content)
+        }
+
+
+//        binding.buttonCancel.setOnClickListener{
+//            binding.groupEditor.visibility = View.GONE
+//            with(binding.content){
+//                setText("")
+//                viewModel.canelEdit()
+//                AndroidUtils.hideKeyboard(this)
+//            }
+//        }
+
+        binding.add.setOnClickListener{
+            activityLauncher.launch(null)
+
         }
     }
 }

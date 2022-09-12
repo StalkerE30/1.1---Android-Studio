@@ -13,6 +13,7 @@ interface OnInteractionListener{
     fun like(post:Post)
     fun share(post:Post)
     fun remove(post:Post)
+    fun playVideoContent(post:Post)
 }
 
 class PostAdapter(
