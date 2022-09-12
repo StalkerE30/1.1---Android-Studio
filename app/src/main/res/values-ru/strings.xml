@@ -13,4 +13,5 @@
     <string name="empty_post_error">Содержание поста не может быть пустым</string>
     <string name="add_post">Добавить пост</string>
     <string name="poster_of_video">постер видео</string>
+    <string name="description_play">Воспроизвести</string>
 </resources>

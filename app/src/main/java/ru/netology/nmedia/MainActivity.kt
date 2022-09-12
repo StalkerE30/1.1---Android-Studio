@@ -42,13 +42,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(shareIntent)
             }
             override fun playVideoContent(post:Post){
-                val intent = Intent().apply {
-                    action = Intent.ACTION_VIEW
-                    Intent(action, Uri.parse(post.urlVideo))
-                }
-                val shareIntent = Intent.createChooser(intent,"choose Youtube")
-                startActivity(shareIntent)
-
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.urlVideo))
+                val youtubeIntent = Intent.createChooser(intent,"choose Youtube")
+                startActivity(youtubeIntent)
             }
             override fun remove(post: Post) {
                 viewModel.removeById(post.id)
@@ -69,12 +65,9 @@ class MainActivity : AppCompatActivity() {
             if (post.id ==0L){
                 return@observe
                 }
-
-
             //binding.groupEditor.visibility = View.VISIBLE
             activityLauncher.launch(post.content)
         }
-
 
 //        binding.buttonCancel.setOnClickListener{
 //            binding.groupEditor.visibility = View.GONE

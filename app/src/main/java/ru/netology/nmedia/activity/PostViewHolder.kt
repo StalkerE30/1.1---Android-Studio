@@ -52,12 +52,14 @@ class PostViewHolder(
             videoPoster.setOnClickListener(){
                 listener.playVideoContent(post)}
 
+            play.setOnClickListener(){
+                listener.playVideoContent(post) }
+
             if (post.urlVideo.isNullOrBlank()){
                 groupVideo.visibility=View.GONE
             } else{
                 groupVideo.visibility=View.VISIBLE
             }
-
 
             menu.setOnClickListener {
                 PopupMenu(it.context,it).apply {
