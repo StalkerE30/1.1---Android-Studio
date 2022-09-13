@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.clickShareById(post.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT,post.content)
+                    putExtra(Intent.EXTRA_TEXT,post.content + " " + (post.urlVideo ?:""))
                     type = "text/plain"
                 }
                 val shareIntent = Intent.createChooser(intent,"chooser_share_post")
