@@ -59,31 +59,29 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar,published,menu" />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/SCROLLER_ID"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:autoLink="web"
-        app:layout_constraintTop_toBottomOf="@id/topBarrier"
-        tools:text="@sample/posts.json/data/content" />
+        android:scrollbars="vertical"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/topBarrier">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="@dimen/common_spacing"
+            android:autoLink="web"
+            tools:text="@sample/posts.json/data/content" />
+    </ScrollView>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/downBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
-
-    <!--<TextView
-        android:id="@+id/textFavorite"
-        android:layout_width="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/favorite"
-        app:layout_constraintBottom_toBottomOf="@id/favorite"
-        tools:text="10"
-        />-->
+        app:constraint_referenced_ids="SCROLLER_ID" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/favorite"
@@ -100,15 +98,6 @@
         android:text="999"
         />
 
-    <!--<TextView
-        android:id="@+id/textShare"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/textFavorite"
-        android:layout_marginStart="@dimen/avatar_size"
-        app:layout_constraintTop_toTopOf="@id/share"
-        app:layout_constraintBottom_toBottomOf="@id/share"
-        tools:text="5" />-->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/share"

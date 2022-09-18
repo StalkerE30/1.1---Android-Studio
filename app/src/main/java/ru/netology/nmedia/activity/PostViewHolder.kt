@@ -1,13 +1,11 @@
 package ru.netology.nmedia.activity
 
-import android.opengl.Visibility
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.PopupMenu
-import ru.netology.nmedia.MainActivity
 import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
+import ru.netology.nmedia.databinding.FragmentNewPostBinding
 import ru.netology.nmedia.dto.Post
 
 
@@ -59,6 +57,10 @@ class PostViewHolder(
                 groupVideo.visibility=View.GONE
             } else{
                 groupVideo.visibility=View.VISIBLE
+            }
+
+            content.setOnClickListener{
+                listener.viewPost(post)
             }
 
             menu.setOnClickListener {

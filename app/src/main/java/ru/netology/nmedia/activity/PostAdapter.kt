@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
@@ -14,6 +13,7 @@ interface OnInteractionListener{
     fun share(post:Post)
     fun remove(post:Post)
     fun playVideoContent(post:Post)
+    fun viewPost(post:Post)
 }
 
 class PostAdapter(

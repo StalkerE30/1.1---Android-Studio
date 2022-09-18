@@ -17,7 +17,7 @@ private val empty = Post(
     likes = 0,
     share = 0,
     likedByMe = false,
-    urlVideo = "https://www.youtube.com/watch?v=WhWc3b3KhnY" // временно. чтобы при добавлении нового поста вставлялось видео
+    urlVideo = "" //"https://www.youtube.com/watch?v=WhWc3b3KhnY" // временно. чтобы при добавлении нового поста вставлялось видео
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
