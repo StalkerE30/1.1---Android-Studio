@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.FragmentViewPost.Companion.idArg
+import ru.netology.nmedia.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.activity.OnInteractionListener
 import ru.netology.nmedia.activity.PostAdapter
 import ru.netology.nmedia.databinding.FragmentFeedBinding
@@ -36,6 +37,10 @@ class FeedFragment : Fragment() {
         val adapter = PostAdapter(object : OnInteractionListener {
             override fun edit(post: Post) {
                 viewModel.edit(post)
+                findNavController().navigate(
+                    R.id.action_feedFragment_to_newPostFragment,
+                    Bundle().apply { textArg = post.content }
+                )
             }
 
             override fun like(post: Post) {

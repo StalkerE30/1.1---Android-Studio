@@ -54,7 +54,7 @@ class FragmentViewPost : Fragment(){
                                 }
                                 R.id.edit -> {
                                     viewModel.edit(post)
-                                    findNavController().navigate(R.id.action_feedFragment_to_newPostFragment,Bundle().apply {textArg = post.content})
+                                    findNavController().navigate(R.id.action_viewPostFragment_to_newPostFragment,Bundle().apply {textArg = post.content})
                                     true
                                 }
                                 else -> false
