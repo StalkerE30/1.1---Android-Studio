@@ -1,5 +1,6 @@
 package ru.netology.nmedia
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,8 +39,23 @@ class FragmentViewPost : Fragment(){
             with(binding) {
                 author.text = post.author
                 published.text = post.published
-                content.text = post.content + " " + (post.urlVideo ?: "")
+                content.text = post.content + " \n" + (post.urlVideo ?: "")
                 favorite.text = post.likes.toString()
+                favorite.isChecked = post.likedByMe
+                favorite.setOnClickListener{
+                    viewModel.likeById(post.id)
+                }
+                share.setOnClickListener{
+                    viewModel.clickShareById(post.id)
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, post.content + " " + (post.urlVideo ?: ""))
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(intent, "chooser_share_post")
+                    startActivity(shareIntent)
+
+                }
                 share.text = post.share.toString()
                 menu.setOnClickListener {
                     PopupMenu(it.context, it).apply {
