@@ -81,19 +81,6 @@ class FeedFragment : Fragment() {
             adapter.submitList(posts)
         }
 
-//         val activityLauncher = registerForActivityResult(NewPostActivity.Contract){text ->
-//                text?: return@registerForActivityResult
-//                viewModel.changeContentAndSave(text)
-//
-//            }
-
-//        viewModel.edited.observe(this){post->
-//            if (post.id ==0L){
-//                return@observe
-//                }
-//            activityLauncher.launch(post.content)
-//        }
-
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
 
