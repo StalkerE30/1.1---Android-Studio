@@ -16,7 +16,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             ${PostColumns.COLUMN_LIKED_BY_ME} BOOLEAN NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_LIKES} INTEGER NOT NULL DEFAULT 0,
             ${PostColumns.COLUMN_SHARE} INTEGER NOT NULL DEFAULT 0,
-            ${PostColumns.COLUMN_URL_VIDEO} TEXT NOT NULL
+            ${PostColumns.COLUMN_URL_VIDEO} TEXT
         );
         """.trimIndent()
     }

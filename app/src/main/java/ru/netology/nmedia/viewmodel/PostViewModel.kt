@@ -48,7 +48,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    fun canelEdit(){
-        edited.value = empty
-    }
+    //fun canelEdit(){
+    //    edited.value = empty
+    //}
 }

@@ -25,8 +25,11 @@ class PostRepositorySQLiteImpl(
     private val data = MutableLiveData(posts)
 
     init {
-        posts = dao.getAll()
-        data.value = posts
+        var postsSql = dao.getAll()
+        if (postsSql.isEmpty())
+            data.value = posts
+        else
+            data.value = posts
     }
 
     override fun save(post: Post) {
