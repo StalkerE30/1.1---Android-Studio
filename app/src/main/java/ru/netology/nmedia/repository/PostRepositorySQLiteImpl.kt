@@ -8,28 +8,28 @@ import ru.netology.nmedia.dto.Post
 class PostRepositorySQLiteImpl(
     private val dao: PostDao
 ) : PostRepository {
-    //private var posts = emptyList<Post>()
-    private var posts = List(10) {
-        Post(
-            id = it.toLong(),
-            author = "Нетология. Университет интернет-профессий будущего",
-            content = "$it Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-            published = "21 сентября в 18:36",
-            likes = 999,
-            share = 99,
-            likedByMe = false,
-            urlVideo = ""
-        )
-    }.reversed()
+    private var posts = emptyList<Post>()
+//    private var postsSql = List(10) {
+//        Post(
+//            id = it.toLong(),
+//            author = "Нетология. Университет интернет-профессий будущего",
+//            content = "$it Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+//            published = "21 сентября в 18:36",
+//            likes = 999,
+//            share = 99,
+//            likedByMe = false,
+//            urlVideo = ""
+//        )
+//    }.reversed()
 
     private val data = MutableLiveData(posts)
 
     init {
-        var postsSql = dao.getAll()
-        if (postsSql.isEmpty())
-            data.value = posts
-        else
-            data.value = posts
+ //       if (dao.getAll().isEmpty()) {
+ //           for (post in postsSql) {dao.save(post)}
+ //       }
+        posts = dao.getAll()
+        data.value = posts
     }
 
     override fun save(post: Post) {
