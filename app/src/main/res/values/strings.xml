@@ -14,4 +14,9 @@
     <string name="add_post">post_save</string>
     <string name="poster_of_video">posterVideo</string>
     <string name="description_play">play</string>
+    <string name="google_play_unavailable">Google Api Unavailable</string>
+    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
+    <string name="notification_user_post_append">User %1$s append new post</string>
+    <string name="channel_remote_name">Server notifications</string>
+    <string name="channel_remote_description">Notifications from remote server</string>
 </resources>
