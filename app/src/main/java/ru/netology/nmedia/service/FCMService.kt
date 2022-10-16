@@ -36,9 +36,13 @@ class FCMService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
 
         message.data[action]?.let {
-           when (Action.valueOf(it)) {
-              //Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
-               Action.NEW_POST_APPEND -> handleLike(gson.fromJson(message.data[content], Post::class.java))
+           try {
+               when (Action.valueOf(it)) {
+                   //Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+                   Action.NEW_POST_APPEND -> handleNewPost(gson.fromJson(message.data[content], Post::class.java))
+               }
+           }    catch (e: IllegalArgumentException) {
+                println("Неверный тип команды!!!")
            }
         }
     }
@@ -47,7 +51,7 @@ class FCMService : FirebaseMessagingService() {
         println(token)
     }
 
-    private fun handleLike(content: Post) {
+    private fun handleNewPost(content: Post) {
         val notification = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(
